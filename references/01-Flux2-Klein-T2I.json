@@ -1,0 +1,303 @@
+{
+  "9": {
+    "inputs": {
+      "filename_prefix": "Flux2-Klein/T2I",
+      "images": [
+        "98",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "84": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect"
+    }
+  },
+  "85": {
+    "inputs": {
+      "steps": 8,
+      "width": [
+        "91",
+        0
+      ],
+      "height": [
+        "92",
+        0
+      ]
+    },
+    "class_type": "Flux2Scheduler",
+    "_meta": {
+      "title": "Flux2Scheduler"
+    }
+  },
+  "86": {
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "103",
+        0
+      ],
+      "positive": [
+        "97",
+        0
+      ],
+      "negative": [
+        "90",
+        0
+      ]
+    },
+    "class_type": "CFGGuider",
+    "_meta": {
+      "title": "CFGGuider"
+    }
+  },
+  "87": {
+    "inputs": {
+      "noise": [
+        "93",
+        0
+      ],
+      "guider": [
+        "86",
+        0
+      ],
+      "sampler": [
+        "84",
+        0
+      ],
+      "sigmas": [
+        "85",
+        0
+      ],
+      "latent_image": [
+        "89",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "SamplerCustomAdvanced"
+    }
+  },
+  "88": {
+    "inputs": {
+      "samples": [
+        "87",
+        0
+      ],
+      "vae": [
+        "96",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "89": {
+    "inputs": {
+      "width": [
+        "91",
+        0
+      ],
+      "height": [
+        "92",
+        0
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyFlux2LatentImage",
+    "_meta": {
+      "title": "Empty Flux 2 Latent"
+    }
+  },
+  "90": {
+    "inputs": {
+      "text": "",
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      },
+      "clip": [
+        "95",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Negative Prompt)"
+    }
+  },
+  "91": {
+    "inputs": {
+      "value": 1920
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Width"
+    }
+  },
+  "92": {
+    "inputs": {
+      "value": 1920
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Height"
+    }
+  },
+  "93": {
+    "inputs": {
+      "noise_seed": 54
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "RandomNoise"
+    }
+  },
+  "94": {
+    "inputs": {
+      "unet_name": "Flux2.klein\\flux-2-klein-9b.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "95": {
+    "inputs": {
+      "clip_name": "Flux2.klein\\qwen_3_8b_fp8mixed.safetensors",
+      "type": "flux2",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "96": {
+    "inputs": {
+      "vae_name": "Flux2.klein\\flux2-vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "97": {
+    "inputs": {
+      "text": [
+        "107",
+        0
+      ],
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      },
+      "clip": [
+        "95",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
+  "98": {
+    "inputs": {
+      "purge_cache": false,
+      "purge_models": false,
+      "anything": [
+        "88",
+        0
+      ]
+    },
+    "class_type": "LayerUtility: PurgeVRAM V2",
+    "_meta": {
+      "title": "LayerUtility: Purge VRAM V2"
+    }
+  },
+  "99": {
+    "inputs": {
+      "mode": "always",
+      "volume": 1,
+      "file": "notify.mp3",
+      "any": [
+        "98",
+        0
+      ]
+    },
+    "class_type": "PlaySound|pysssss",
+    "_meta": {
+      "title": "PlaySound 🐍"
+    }
+  },
+  "100": {
+    "inputs": {
+      "reserved": 2,
+      "mode": "auto",
+      "seed": 347244135975081,
+      "auto_max_reserved": 0,
+      "clean_gpu_before": true,
+      "anything": [
+        "94",
+        0
+      ]
+    },
+    "class_type": "ReservedVRAMSetter",
+    "_meta": {
+      "title": "Set Reserved VRAM(GB) ⚙️"
+    }
+  },
+  "103": {
+    "inputs": {
+      "PowerLoraLoaderHeaderWidget": {
+        "type": "PowerLoraLoaderHeaderWidget"
+      },
+      "lora_1": {
+        "on": false,
+        "lora": "Flux2.klein Lora\\NSFW UNLOCKED\\FLUX2_KLEIN_UNLOCKED_V1.safetensors",
+        "strength": 0.9
+      },
+      "➕ Add Lora": "",
+      "model": [
+        "100",
+        0
+      ]
+    },
+    "class_type": "Power Lora Loader (rgthree)",
+    "_meta": {
+      "title": "Power Lora Loader (rgthree)"
+    }
+  },
+  "107": {
+    "inputs": {
+      "prompt": "超寫實、栩栩如生的攝影作品；一位繆斯般高冷、優雅的女性（青春偶像般的面容，精緻的五官），擁有冷艷如瓷的白皙肌膚（冷艷如瓷的蒼白肌膚，毛孔清晰可見，高光濕潤），以及穿著10厘米黑色漆皮高跟鞋、顯得格外修長的雙腿。她身穿黑色高級訂製禮服，裙擺開衩極高，露出整條大腿；長裙被強風猛烈地向後吹拂，在她身後飄動（大片拖曳的裙擺向後飄揚，而非垂直下垂），她烏黑亮麗的長直髮也隨之飄動。\n\n構圖/動作：主體位於畫面中心偏右的位置，正向畫面左前方走去（向左移動，向前邁步），呈四分之三側面輪廓，右肩略微靠近鏡頭；她左腿向前邁出，右腿支撐著身體的重量，進一步強化了腿部的視覺效果；她微微側頭看向鏡頭，目光冰冷而威嚴。\n\n環境：雨夜，濃霧瀰漫，場景開闊空曠（空曠的立體交叉/碼頭/屋頂邊緣）。背景極簡，僅保留幾盞遠處的燈光作為背景虛化。一盞強烈的逆光路燈/探照燈在她身後形成巨大的光暈。濕地如鏡般反射光線，雨滴和水花在半空中清晰可見。\n\n構圖/拍攝位置：仰拍視角，腿部佔據畫面75-85%的面積。背景虛化嚴重。主體佔據畫面85-95%的面積，幾乎延伸至畫面頂部邊緣。腳部和高跟鞋在前景中清晰可見。主體距離鏡頭極近（近景構圖，主體充滿畫面，留白極少）。相機離地面5-10厘米，使用18mm超廣角鏡頭。鏡頭到鞋尖的距離為0.35-0.6公尺。\n\n（劍）：右手反握武士刀，刀柄靠近右側髖部外側，手背朝外。刀刃從右側向前向下延伸至前景，營造出強烈的視覺衝擊。刀尖清晰地指向畫面左下角，幾乎觸及鏡頭，刀刃橫跨畫面下半部分，形成一條對角線。刀刃散發著冷冽的金屬光澤，雨滴順著刀刃滑落，刀尖附近還有幾滴火花/水滴。切勿將刀尖指向右下角，也不要將劍置於背景或身體後方；必須將其置於前景，以吸引觀眾的目光。\n\n景深較淺（f/1.8-f/2.2），主體極為銳利，冷灰藍色電影色彩漸變，動態範圍高，真實攝影中顆粒感非常輕微。",
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      }
+    },
+    "class_type": "CR Prompt Text",
+    "_meta": {
+      "title": "⚙️ CR Prompt Text"
+    }
+  }
+}

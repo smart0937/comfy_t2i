@@ -1,0 +1,554 @@
+{
+  "9": {
+    "inputs": {
+      "filename_prefix": "Flux2-Klein/Edit",
+      "images": [
+        "116",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "76": {
+    "inputs": {
+      "image": "S__263938363.jpg"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "100": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect"
+    }
+  },
+  "101": {
+    "inputs": {
+      "steps": [
+        "129",
+        0
+      ],
+      "width": [
+        "118",
+        1
+      ],
+      "height": [
+        "118",
+        2
+      ]
+    },
+    "class_type": "Flux2Scheduler",
+    "_meta": {
+      "title": "Flux2Scheduler"
+    }
+  },
+  "102": {
+    "inputs": {
+      "cfg": [
+        "128",
+        0
+      ],
+      "model": [
+        "125",
+        0
+      ],
+      "positive": [
+        "113:77",
+        0
+      ],
+      "negative": [
+        "113:132",
+        0
+      ]
+    },
+    "class_type": "CFGGuider",
+    "_meta": {
+      "title": "CFGGuider"
+    }
+  },
+  "103": {
+    "inputs": {
+      "noise": [
+        "105",
+        0
+      ],
+      "guider": [
+        "102",
+        0
+      ],
+      "sampler": [
+        "100",
+        0
+      ],
+      "sigmas": [
+        "101",
+        0
+      ],
+      "latent_image": [
+        "111",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "SamplerCustomAdvanced"
+    }
+  },
+  "104": {
+    "inputs": {
+      "samples": [
+        "103",
+        0
+      ],
+      "vae": [
+        "110",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "105": {
+    "inputs": {
+      "noise_seed": 666
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "RandomNoise"
+    }
+  },
+  "106": {
+    "inputs": {
+      "unet_name": "Flux2.klein\\flux-2-klein-9b.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "107": {
+    "inputs": {
+      "clip_name": "Flux2.klein\\qwen_3_8b_fp8mixed.safetensors",
+      "type": "flux2",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "108": {
+    "inputs": {
+      "text": [
+        "119",
+        0
+      ],
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      },
+      "clip": [
+        "107",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
+  "109": {
+    "inputs": {
+      "text": "錯誤的人體解剖學,不正常的手,不正常的腳,",
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      },
+      "clip": [
+        "107",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Negative Prompt)"
+    }
+  },
+  "110": {
+    "inputs": {
+      "vae_name": "Flux2.klein\\flux2-vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "111": {
+    "inputs": {
+      "width": [
+        "118",
+        1
+      ],
+      "height": [
+        "118",
+        2
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyFlux2LatentImage",
+    "_meta": {
+      "title": "Empty Flux 2 Latent"
+    }
+  },
+  "115": {
+    "inputs": {
+      "clean_file_cache": true,
+      "clean_processes": true,
+      "clean_dlls": true,
+      "retry_times": 3,
+      "anything": [
+        "76",
+        0
+      ]
+    },
+    "class_type": "RAMCleanup",
+    "_meta": {
+      "title": "🎈RAM-Cleanup"
+    }
+  },
+  "116": {
+    "inputs": {
+      "purge_cache": false,
+      "purge_models": false,
+      "anything": [
+        "104",
+        0
+      ]
+    },
+    "class_type": "LayerUtility: PurgeVRAM V2",
+    "_meta": {
+      "title": "LayerUtility: Purge VRAM V2"
+    }
+  },
+  "117": {
+    "inputs": {
+      "mode": "always",
+      "volume": 1,
+      "file": "notify.mp3",
+      "any": [
+        "116",
+        0
+      ]
+    },
+    "class_type": "PlaySound|pysssss",
+    "_meta": {
+      "title": "PlaySound 🐍"
+    }
+  },
+  "118": {
+    "inputs": {
+      "image": [
+        "131",
+        0
+      ]
+    },
+    "class_type": "GetImageSizeAndCount",
+    "_meta": {
+      "title": "Get Image Size & Count"
+    }
+  },
+  "119": {
+    "inputs": {
+      "prompt": "强冷白光照明，轻微压缩噪点，低码率真实监控质感。生活照，自然，镜头下沉，仰拍，一张正面角度照片，拍摄了一个超级漂亮可爱的美少女。相机放在她的两腿之间，双腿张开，膝盖自然弯曲，聚焦在她湿润的生殖器上。她的阴道在图像的中心被强调，她的阴唇微微分开。这名少女有浅棕色皮肤，阴埠有一小三角形的阴毛。她的胸部在画面顶部部分可见，身材苗条，色调匀称。背景是一堵白色的墙，墙上有门框，左上角有一盆盆栽。灯光明亮均匀，突出了她的皮肤和生殖器的水分。右上角的墙上安装着一个小的、圆形的、米色的灯具。整体风格是露骨和色情的，强调女性的生殖器和她自信、感性的举止。图像非常详细和清晰，精确地聚焦在主体上。她举着一个拍照，上面写着：LL,I LOVE YOU.",
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      }
+    },
+    "class_type": "CR Prompt Text",
+    "_meta": {
+      "title": "FLUX2_KLEIN_UNLOCKED_V1.safetensors(NSFW UNLOCK)"
+    }
+  },
+  "120": {
+    "inputs": {
+      "direction": "left",
+      "match_image_size": true,
+      "image1": [
+        "116",
+        0
+      ],
+      "image2": [
+        "76",
+        0
+      ]
+    },
+    "class_type": "ImageConcanate",
+    "_meta": {
+      "title": "Image Concatenate"
+    }
+  },
+  "124": {
+    "inputs": {
+      "reserved": 2,
+      "mode": "auto",
+      "seed": 701712243050517,
+      "auto_max_reserved": 0,
+      "clean_gpu_before": true,
+      "anything": [
+        "106",
+        0
+      ]
+    },
+    "class_type": "ReservedVRAMSetter",
+    "_meta": {
+      "title": "Set Reserved VRAM(GB) ⚙️"
+    }
+  },
+  "125": {
+    "inputs": {
+      "PowerLoraLoaderHeaderWidget": {
+        "type": "PowerLoraLoaderHeaderWidget"
+      },
+      "lora_1": {
+        "on": false,
+        "lora": "Flux2.klein Lora\\Unchained XXX\\KLEIN-Unchained-V2.safetensors",
+        "strength": 1
+      },
+      "lora_2": {
+        "on": false,
+        "lora": "Flux2.klein Lora\\PussyDiffusion\\pussydiffusion-f2-klein-9b.safetensors",
+        "strength": 1
+      },
+      "lora_3": {
+        "on": false,
+        "lora": "Flux2.klein Lora\\AIO NSFW\\FluxK4Play.v1.safetensors",
+        "strength": 1
+      },
+      "lora_4": {
+        "on": false,
+        "lora": "Flux2.klein Lora\\SexGod Improved Female Nudity\\SEXGOD_ImprovedNudity_Klein9b_v2_5.safetensors",
+        "strength": 1
+      },
+      "lora_5": {
+        "on": false,
+        "lora": "Flux2.klein Lora\\Turn2Real\\klein-9b-turn2real_v1_ep4.safetensors",
+        "strength": 1
+      },
+      "lora_6": {
+        "on": false,
+        "lora": "Flux2.klein Lora\\SexGod Female Masturbation\\SEXGOD_FemaleMasturbation_Klein9b_v1.safetensors",
+        "strength": 1
+      },
+      "lora_7": {
+        "on": false,
+        "lora": "Flux2.klein Lora\\SNOFS\\klein_snofs_v1_2.safetensors",
+        "strength": 1
+      },
+      "lora_8": {
+        "on": false,
+        "lora": "Flux2.klein Lora\\Realistic Nudes\\realistic_nudes_klein_v1.safetensors",
+        "strength": 0.8
+      },
+      "lora_9": {
+        "on": false,
+        "lora": "Flux2.klein Lora\\Klein Fixes (NSFW)\\FLUX_NSFW_Fix.safetensors",
+        "strength": 1
+      },
+      "lora_10": {
+        "on": true,
+        "lora": "Flux2.klein Lora\\NSFW UNLOCKED\\FLUX2_KLEIN_UNLOCKED_V1.safetensors",
+        "strength": 0.9
+      },
+      "lora_11": {
+        "on": false,
+        "lora": "Flux2.klein Lora\\Consistence Edit Lora\\f2k_consist_20260225.safetensors",
+        "strength": 0.7
+      },
+      "➕ Add Lora": "",
+      "model": [
+        "124",
+        0
+      ]
+    },
+    "class_type": "Power Lora Loader (rgthree)",
+    "_meta": {
+      "title": "Power Lora Loader (rgthree)"
+    }
+  },
+  "128": {
+    "inputs": {
+      "value": 1
+    },
+    "class_type": "FloatConstant",
+    "_meta": {
+      "title": "Float Constant"
+    }
+  },
+  "129": {
+    "inputs": {
+      "value": 8
+    },
+    "class_type": "INTConstant",
+    "_meta": {
+      "title": "INT Constant"
+    }
+  },
+  "131": {
+    "inputs": {
+      "width": 1920,
+      "height": 1920,
+      "upscale_method": "lanczos",
+      "keep_proportion": "resize",
+      "pad_color": "0, 0, 0",
+      "crop_position": "center",
+      "divisible_by": 16,
+      "device": "cpu",
+      "image": [
+        "115",
+        0
+      ]
+    },
+    "class_type": "ImageResizeKJv2",
+    "_meta": {
+      "title": "Resize Image v2"
+    }
+  },
+  "154": {
+    "inputs": {
+      "prompt": "將動漫人物轉換成年輕漂亮的真人寫實。",
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      }
+    },
+    "class_type": "CR Prompt Text",
+    "_meta": {
+      "title": "⚙️ CR Prompt Text"
+    }
+  },
+  "174": {
+    "inputs": {
+      "images": [
+        "116",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "176": {
+    "inputs": {
+      "prompt": "reskin this into a real photo.\nMASTURBATE, she have detailed realistic vulva and labia, visible vagina, wetness shine.",
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      }
+    },
+    "class_type": "CR Prompt Text",
+    "_meta": {
+      "title": "klein-9b-turn2real_v1_ep4.safetensors(動漫轉真人)"
+    }
+  },
+  "177": {
+    "inputs": {
+      "prompt": "a girl,nude, fully nude, naked, areola, shaved pubic area.\na water is insert her pussy.",
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      }
+    },
+    "class_type": "CR Prompt Text",
+    "_meta": {
+      "title": "FLUX2_KLEIN_UNLOCKED_V1.safetensors(NSFW UNLOCK)"
+    }
+  },
+  "178": {
+    "inputs": {
+      "prompt": "camera behind a female swimming under water nude, her legs are apart out of image frame and her [vulva] and [anus] visable, ocean with fish and coral, camera is close to her butt, high saturation high color 4k image, she has a large [anus].",
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      }
+    },
+    "class_type": "CR Prompt Text",
+    "_meta": {
+      "title": "FLUX_NSFW_Fix.safetensors(NSFW修正)"
+    }
+  },
+  "113:132": {
+    "inputs": {
+      "conditioning": [
+        "109",
+        0
+      ],
+      "latent": [
+        "113:78",
+        0
+      ]
+    },
+    "class_type": "ReferenceLatent",
+    "_meta": {
+      "title": "ReferenceLatent"
+    }
+  },
+  "113:78": {
+    "inputs": {
+      "pixels": [
+        "131",
+        0
+      ],
+      "vae": [
+        "110",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "113:77": {
+    "inputs": {
+      "conditioning": [
+        "108",
+        0
+      ],
+      "latent": [
+        "113:78",
+        0
+      ]
+    },
+    "class_type": "ReferenceLatent",
+    "_meta": {
+      "title": "ReferenceLatent"
+    }
+  }
+}
