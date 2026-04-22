@@ -4,33 +4,52 @@ import time
 import os
 import sys
 import random
+import argparse
 
 # Configuration
 COMPYUI_URL = "http://172.16.1.3:8188"
 DEFAULT_WORKFLOW = os.path.expanduser("~/.hermes/skills/mlops/comfy_t2i/references/01-Flux2-Klein-T2I.json")
-WORKFLOW_PATH = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_WORKFLOW
-EDIT_PROMPT_TEXT = sys.argv[2] if len(sys.argv) > 2 else "A high-quality, realistic photograph."
-
 DELIVERY_DIR = os.path.expanduser("~/.hermes/hermes-agent/output")
-TRANSIENT_FILE = os.path.join(DELIVERY_DIR, "t2i_transient_output.png")
 T2I_PROMPT_NODE_ID = "107"
 NOISE_SEED_NODE_ID = "93"
 
 def run_automation():
+    parser = argparse.ArgumentParser(description="ComfyUI T2I Automation")
+    parser.add_argument("workflow", nargs="?", default=DEFAULT_WORKFLOW, help="Path to workflow JSON")
+    parser.add_argument("prompt", nargs="?", default="A high-quality, realistic photograph.", help="Prompt text")
+    parser.add_argument("--user_id", type=str, default=None, help="Telegram User ID for filename isolation")
+    
+    args = parser.parse_args()
+    
+    workflow_path = args.workflow
+    edit_prompt_text = args.prompt
+    user_id = args.user_id
+
+    # Generate unique filename
+    timestamp_ms = int(time.time() * 1000)
+    process_id = os.getpid()
+    
+    if user_id:
+        unique_id = f"{user_id}_{timestamp_ms}_{process_id}"
+    else:
+        unique_id = f"{timestamp_ms}_{process_id}"
+        
+    transient_file = os.path.join(DELIVERY_DIR, f"t2i_transient_{unique_id}.png")
+
     try:
         os.makedirs(DELIVERY_DIR, exist_ok=True)
-        if not os.path.exists(WORKFLOW_PATH):
-            print(f"Error: Workflow not found at {WORKFLOW_PATH}")
+        if not os.path.exists(workflow_path):
+            print(f"Error: Workflow not found at {workflow_path}")
             return
 
-        with open(WORKFLOW_PATH, 'r', encoding='utf-8') as f:
+        with open(workflow_path, 'r', encoding='utf-8') as f:
             workflow = json.load(f)
 
         if T2I_PROMPT_NODE_ID in workflow:
             node_data = workflow[T2I_PROMPT_NODE_ID]
             for key in ["prompt", "text"]:
                 if key in node_data.get("inputs", {}):
-                    node_data["inputs"][key] = EDIT_PROMPT_TEXT
+                    node_data["inputs"][key] = edit_prompt_text
                     print(f"Injected prompt into Node {T2I_PROMPT_NODE_ID} (CR Prompt Text)")
                     break
         else:
@@ -77,10 +96,10 @@ def run_automation():
                         print(f"Downloading: {download_url}")
                         img_resp = requests.get(download_url, stream=True)
                         if img_resp.status_code == 200:
-                            with open(TRANSIENT_FILE, 'wb') as f:
+                            with open(transient_file, 'wb') as f:
                                 f.write(img_resp.content)
-                            print(f"MEDIA:{TRANSIENT_FILE}")
-                            print(f"SIGNAL:DELIVERY_COMPLETE:{TRANSIENT_FILE}")
+                            print(f"MEDIA:{transient_file}")
+                            print(f"SIGNAL:DELIVERY_COMPLETE:{transient_file}")
                         else:
                             print(f"Download failed: {img_resp.status_code}")
                         break
